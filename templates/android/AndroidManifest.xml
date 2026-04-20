@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="::APP_PACKAGE::"
+	android:versionCode="::APP_BUILD_NUMBER::"
+	android:versionName="::APP_VERSION::"
+	android:installLocation="auto">
+
+	<!-- _________________________ Permissions _________________________ -->
+
+	<!-- Internet access (for future online features / update checks) -->
+	<uses-permission android:name="android.permission.INTERNET" />
+
+	<!-- Vibration (for miss/hit feedback) -->
+	<uses-permission android:name="android.permission.VIBRATE" />
+
+	<!-- Storage: legacy read/write (Android 5–9) -->
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+		android:maxSdkVersion="29" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+		android:maxSdkVersion="29" />
+
+	<!-- Storage: scoped storage media access (Android 10–12) -->
+	<uses-permission android:name="android.permission.READ_MEDIA_IMAGES"    />
+	<uses-permission android:name="android.permission.READ_MEDIA_AUDIO"     />
+	<uses-permission android:name="android.permission.READ_MEDIA_VIDEO"     />
+
+	<!-- Storage: full external storage manager (Android 11+ / API 30+)
+	     Required so the game can read mods from /sdcard/BrenninhoEngine/mods.
+	     NOTE: Google Play requires a declaration form for this permission.
+	           If shipping on Play, consider using SAF (Storage Access Framework) instead. -->
+	<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+	<!-- Wake lock: prevents screen from sleeping mid-song -->
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+
+	<!-- _________________________ Hardware Features _________________________ -->
+
+	<!-- OpenGL ES 3.0 required (for OPENFL_GLES3_CONTEXT) -->
+	<uses-feature android:glEsVersion="0x00030000" android:required="true" />
+
+	<!-- Touchscreen required -->
+	<uses-feature android:name="android.hardware.touchscreen" android:required="true" />
+
+	<!-- Gamepad optional (controller support) -->
+	<uses-feature android:name="android.hardware.gamepad" android:required="false" />
+
+	<!-- _____________________________ Application _____________________________ -->
+
+	<application
+		android:label="::APP_TITLE::"
+		android:icon="@drawable/ic_launcher"
+		android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+		android:allowBackup="false"
+		android:hardwareAccelerated="true"
+		android:requestLegacyExternalStorage="true"
+		android:preserveLegacyExternalStorage="true"
+		android:largeHeap="true">
+
+		<!-- _____________________ Main Activity _____________________ -->
+
+		<activity
+			android:name="::APP_PACKAGE::.GameActivity"
+			android:label="::APP_TITLE::"
+			android:screenOrientation="landscape"
+			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+			android:launchMode="singleTask"
+			android:resizeableActivity="false"
+			android:exported="true">
+
+			<!-- App launcher intent -->
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+
+		</activity>
+
+	</application>
+
+</manifest>
